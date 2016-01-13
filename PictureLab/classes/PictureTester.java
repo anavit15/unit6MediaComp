@@ -9,6 +9,15 @@
 public class PictureTester
 {
   /** Method to test zeroBlue */
+  public static void testScaleByHalf()
+  {
+    Picture scaledPic=new Picture(500,500);
+    Picture sourcePic = new Picture("beach.jpg");
+    scaledPic.explore();
+    scaledPic.scaleByHalf(sourcePic);
+    scaledPic.explore();
+    sourcePic.explore();
+  }
   public static void testZeroBlue()
   {
     Picture beach = new Picture("beach.jpg");
@@ -16,6 +25,46 @@ public class PictureTester
     beach.zeroBlue();
     beach.explore();
   }
+  public static void testCropAndCopy()
+  {
+    Picture destPic = new Picture("beach.jpg");
+    Picture sourcePic = new Picture("caterpillar.jpg");
+    destPic.explore();
+    destPic.cropAndCopy(sourcePic, 10,100,10,100,100,100);
+    destPic.explore();
+    
+  }
+   public static void testKeepOnlyBlue()
+  {
+    Picture beach = new Picture("beach.jpg");
+    beach.explore();
+    beach.keepOnlyBlue();
+    beach.explore();
+  }
+  
+   public static void testNegate()
+  {
+    Picture beach = new Picture("beach.jpg");
+    beach.explore();
+    beach.negate();
+    beach.explore();
+  }
+  
+  public static void testGrayscale()
+  {
+    Picture beach = new Picture("water.jpg");
+    beach.explore();
+    beach.grayscale();
+    beach.explore();
+  }
+  
+//   public static void testFixUnderwater()
+//   {
+//     Picture beach = new Picture("water.jpg");
+//     beach.explore();
+//     beach.fixUnderwater();
+//     beach.explore();
+//   }
   
   /** Method to test mirrorVertical */
   public static void testMirrorVertical()

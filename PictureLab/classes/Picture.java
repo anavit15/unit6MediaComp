@@ -85,10 +85,49 @@ public class Picture extends SimplePicture
     
   }
   
+  public void cropAndCopy( Picture sourcePicture, int startSourceRow, int endSourceRow, int startSourceCol, int endSourceCol,
+         int startDestRow, int startDestCol )
+         {
+    Pixel[][] sourcePixels = sourcePicture.getPixels2D();
+    Pixel[][] destinationPixels = this.getPixels2D();
+    Pixel sourcePixel = null;
+    int originalDestCol=startDestCol;
+    for (int row = startSourceRow; row < endSourceRow; row++)
+    {
+      startDestRow++;
+      for (int col=startSourceCol;col<endSourceCol; col++)
+      {
+        
+        destinationPixels[startDestRow][startDestCol].setColor(sourcePixels[row][col].getColor());
+        startDestCol++;
+      }
+      startDestCol=originalDestCol;
+    }
+  }
+  
+  public void scaleByHalf(Picture sourcePicture)
+  {
+    Pixel[][] originalPixels = sourcePicture.getPixels2D();
+    Pixel[][] scaledPixels = this.getPixels2D();
+    int scaledRow=0;
+    int scaledCol=0;
+    for (int row = 0; row < originalPixels.length; row+=2)
+    {
+      for (int col = 0; col < originalPixels[row].length; col+=2)
+      {
+        scaledPixels[scaledRow][scaledCol].setColor(originalPixels[row][col].getColor());
+        scaledCol++;
+      }
+      scaledCol=0;
+      scaledRow++;
+    } 
+    
+  }
   /** Method to set the blue to 0 */
   public void zeroBlue()
   {
     Pixel[][] pixels = this.getPixels2D();
+
     for (Pixel[] rowArray : pixels)
     {
       for (Pixel pixelObj : rowArray)
@@ -97,6 +136,50 @@ public class Picture extends SimplePicture
       }
     }
   }
+  
+  public void keepOnlyBlue()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    for (Pixel[] rowArray : pixels)
+    {
+      for (Pixel pixelObj : rowArray)
+      {
+        pixelObj.setRed(200);
+        pixelObj.setGreen(10);
+      }
+    }
+  }
+  
+   public void negate()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    for (Pixel[] rowArray : pixels)
+    {
+      for (Pixel pixelObj : rowArray)
+      {
+        pixelObj.setRed(255-pixelObj.getRed());
+        pixelObj.setGreen(255-pixelObj.getGreen());
+        pixelObj.setBlue(255-pixelObj.getBlue());
+      }
+    }
+  }
+  
+   public void grayscale()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    
+    for (Pixel[] rowArray : pixels)
+    {
+      for (Pixel pixelObj : rowArray)
+      {
+        int average=(pixelObj.getRed()+pixelObj.getGreen()+pixelObj.getBlue())/3;
+        pixelObj.setRed(average);
+        pixelObj.setGreen(average);
+        pixelObj.setBlue(average);
+      }
+    }
+  }
+   
   
   /** Method that mirrors the picture around a 
     * vertical mirror in the center of the picture
