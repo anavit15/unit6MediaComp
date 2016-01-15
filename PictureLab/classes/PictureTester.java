@@ -8,15 +8,39 @@
  */
 public class PictureTester
 {
-  /** Method to test zeroBlue */
+  
   public static void testScaleByHalf()
   {
-    Picture scaledPic=new Picture(500,500);
     Picture sourcePic = new Picture("beach.jpg");
+    Picture scaledPic=new Picture((sourcePic.getRows()/2),(sourcePic.getCols()/2));
     scaledPic.explore();
     scaledPic.scaleByHalf(sourcePic);
     scaledPic.explore();
     sourcePic.explore();
+  }
+ 
+  public static void testScaleWidthByHalf()
+  {
+    Picture sourcePic = new Picture("beach.jpg");
+    Picture scaledPic=new Picture((sourcePic.getRows()),(sourcePic.getCols()/2));
+    scaledPic.explore();
+    scaledPic.scaleWidthByHalf(sourcePic);
+    scaledPic.explore();
+    sourcePic.explore();
+  }
+  
+  public static void testDoubleVision()
+  {
+      Picture sourcePic = new Picture("beach.jpg");
+      Picture scaledPic=new Picture((sourcePic.getRows()),(sourcePic.getCols()/2));
+      scaledPic.scaleWidthByHalf(sourcePic);
+      Picture doubleVision=new Picture((sourcePic.getRows()),(sourcePic.getCols()));
+      doubleVision.cropAndCopy(scaledPic,0,(scaledPic.getRows()-1),0,(scaledPic.getCols()-1),0,0);
+      doubleVision.cropAndCopy(scaledPic,0,(scaledPic.getRows()-1),0,(scaledPic.getCols()-1),0,(scaledPic.getCols()-1));
+      //doubleVision.cropAndCopy(scaledPic,0,(scaledPic.getRows()),(scaledPic.getCols()),(sourcePic.getCols()),0,(scaledPic.getCols()));
+      doubleVision.explore();
+      scaledPic.explore();
+      sourcePic.explore();
   }
   public static void testZeroBlue()
   {

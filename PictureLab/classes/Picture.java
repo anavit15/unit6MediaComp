@@ -85,26 +85,6 @@ public class Picture extends SimplePicture
     
   }
   
-  public void cropAndCopy( Picture sourcePicture, int startSourceRow, int endSourceRow, int startSourceCol, int endSourceCol,
-         int startDestRow, int startDestCol )
-         {
-    Pixel[][] sourcePixels = sourcePicture.getPixels2D();
-    Pixel[][] destinationPixels = this.getPixels2D();
-    Pixel sourcePixel = null;
-    int originalDestCol=startDestCol;
-    for (int row = startSourceRow; row < endSourceRow; row++)
-    {
-      startDestRow++;
-      for (int col=startSourceCol;col<endSourceCol; col++)
-      {
-        
-        destinationPixels[startDestRow][startDestCol].setColor(sourcePixels[row][col].getColor());
-        startDestCol++;
-      }
-      startDestCol=originalDestCol;
-    }
-  }
-  
   public void scaleByHalf(Picture sourcePicture)
   {
     Pixel[][] originalPixels = sourcePicture.getPixels2D();
@@ -122,6 +102,57 @@ public class Picture extends SimplePicture
       scaledRow++;
     } 
     
+  }
+  
+  public void scaleWidthByHalf(Picture sourcePicture)
+  {
+    Pixel[][] originalPixels = sourcePicture.getPixels2D();
+    Pixel[][] scaledPixels = this.getPixels2D();
+    int scaledRow=0;
+    int scaledCol=0;
+    for (int row = 0; row < originalPixels.length; row++)
+    {
+      for (int col = 0; col < originalPixels[row].length; col+=2)
+      {
+        scaledPixels[scaledRow][scaledCol].setColor(originalPixels[row][col].getColor());
+        scaledCol++;
+      }
+      scaledCol=0;
+      scaledRow++;
+    } 
+    
+  }
+  
+  public int getRows()
+  {
+      Pixel[][] originalPixels = this.getPixels2D();
+      return originalPixels.length;
+  }
+  
+  public int getCols()
+  {
+      Pixel[][] originalPixels = this.getPixels2D();
+      return originalPixels[0].length;
+  }
+  
+  public void cropAndCopy( Picture sourcePicture, int startSourceRow, int endSourceRow, int startSourceCol, int endSourceCol,
+         int startDestRow, int startDestCol )
+         {
+    Pixel[][] sourcePixels = sourcePicture.getPixels2D();
+    Pixel[][] destinationPixels = this.getPixels2D();
+    Pixel sourcePixel = null;
+    int originalDestCol=startDestCol;
+    for (int row = startSourceRow; row <= endSourceRow; row++)
+    {
+      
+      for (int col=startSourceCol;col<=endSourceCol; col++)
+      {
+        destinationPixels[startDestRow][startDestCol].setColor(sourcePixels[row][col].getColor());
+        startDestCol++;
+      }
+      startDestCol=originalDestCol;
+      startDestRow++;
+    }
   }
   /** Method to set the blue to 0 */
   public void zeroBlue()
