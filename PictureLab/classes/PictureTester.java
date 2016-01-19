@@ -9,7 +9,26 @@
 public class PictureTester
 {
   
-  public static void testScaleByHalf()
+ public static void makeCollage()
+ {
+      Picture sourcePic = new Picture("lamp.jpg");
+      Picture scaledPic=new Picture((sourcePic.getRows()),(sourcePic.getCols()/2));
+      scaledPic.scaleWidthByHalf(sourcePic);
+      Picture part1=new Picture((sourcePic.getRows()),(sourcePic.getCols()));
+      part1.cropAndCopy(scaledPic,0,(scaledPic.getRows()-1),0,(scaledPic.getCols()-1),0,0);
+      part1.cropAndCopy(scaledPic,0,(scaledPic.getRows()-1),0,(scaledPic.getCols()-1),0,(scaledPic.getCols()-1));
+      part1.brightness(50);
+      
+      Picture part2=new Picture("lamp.jpg");
+      part2.brightness(25);
+      
+      Picture collageCanvas=new Picture((sourcePic.getRows()*2),(sourcePic.getCols()*3));
+      collageCanvas.cropAndCopy(part1,0,part1.getRows()-1,0,part1.getCols()-1,0,0);
+      collageCanvas.explore();
+ 
+ }
+  
+    public static void testScaleByHalf()
   {
     Picture sourcePic = new Picture("beach.jpg");
     Picture scaledPic=new Picture((sourcePic.getRows()/2),(sourcePic.getCols()/2));
@@ -31,17 +50,17 @@ public class PictureTester
   
   public static void testDoubleVision()
   {
-      Picture sourcePic = new Picture("beach.jpg");
+      Picture sourcePic = new Picture("man.jpg");
       Picture scaledPic=new Picture((sourcePic.getRows()),(sourcePic.getCols()/2));
       scaledPic.scaleWidthByHalf(sourcePic);
       Picture doubleVision=new Picture((sourcePic.getRows()),(sourcePic.getCols()));
       doubleVision.cropAndCopy(scaledPic,0,(scaledPic.getRows()-1),0,(scaledPic.getCols()-1),0,0);
       doubleVision.cropAndCopy(scaledPic,0,(scaledPic.getRows()-1),0,(scaledPic.getCols()-1),0,(scaledPic.getCols()-1));
-      //doubleVision.cropAndCopy(scaledPic,0,(scaledPic.getRows()),(scaledPic.getCols()),(sourcePic.getCols()),0,(scaledPic.getCols()));
+      //doubleVision.dark();
       doubleVision.explore();
-      scaledPic.explore();
-      sourcePic.explore();
+ 
   }
+ 
   public static void testZeroBlue()
   {
     Picture beach = new Picture("beach.jpg");

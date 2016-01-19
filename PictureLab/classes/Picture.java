@@ -155,6 +155,7 @@ public class Picture extends SimplePicture
     }
   }
   /** Method to set the blue to 0 */
+  
   public void zeroBlue()
   {
     Pixel[][] pixels = this.getPixels2D();
@@ -167,6 +168,23 @@ public class Picture extends SimplePicture
       }
     }
   }
+  
+   public void brightness(int scale)
+  {
+    Pixel[][] pixels = this.getPixels2D();
+
+    for (Pixel[] rowArray : pixels)
+    {
+      for (Pixel pixelObj : rowArray)
+      {
+        int average=(pixelObj.getRed()+pixelObj.getGreen()+pixelObj.getBlue())/3;
+        pixelObj.setRed(average-scale);
+        pixelObj.setGreen(average-scale);
+        pixelObj.setBlue(average-scale);
+      }
+    }
+  }
+  
   
   public void keepOnlyBlue()
   {
