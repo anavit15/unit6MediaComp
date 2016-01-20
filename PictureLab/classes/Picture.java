@@ -156,7 +156,7 @@ public class Picture extends SimplePicture
   }
   /** Method to set the blue to 0 */
   
-  public void zeroBlue()
+  public void color(int red)
   {
     Pixel[][] pixels = this.getPixels2D();
 
@@ -164,11 +164,54 @@ public class Picture extends SimplePicture
     {
       for (Pixel pixelObj : rowArray)
       {
-        pixelObj.setBlue(0);
+        pixelObj.setRed(red);
+        //pixelObj.setBlue(blue);
+        //pixelObj.setGreen(green);
       }
     }
   }
-  
+  public void color2(int green)
+  {
+    Pixel[][] pixels = this.getPixels2D();
+
+    for (Pixel[] rowArray : pixels)
+    {
+      for (Pixel pixelObj : rowArray)
+      {
+        //pixelObj.setRed(red);
+        //pixelObj.setBlue(blue);
+        pixelObj.setGreen(green);
+      }
+    }
+  }
+  public void color3(int blue)
+  {
+    Pixel[][] pixels = this.getPixels2D();
+
+    for (Pixel[] rowArray : pixels)
+    {
+      for (Pixel pixelObj : rowArray)
+      {
+        //pixelObj.setRed(red);
+        pixelObj.setBlue(blue);
+        //pixelObj.setGreen(green);
+      }
+    }
+  }
+   public void blueness(int scale)
+  {
+    Pixel[][] pixels = this.getPixels2D();
+
+    for (Pixel[] rowArray : pixels)
+    {
+      for (Pixel pixelObj : rowArray)
+      {
+        int average=(pixelObj.getRed()+pixelObj.getGreen()+pixelObj.getBlue())/3;
+        pixelObj.setBlue(average+scale);
+      }
+    }
+  }
+ 
    public void brightness(int scale)
   {
     Pixel[][] pixels = this.getPixels2D();
@@ -349,7 +392,7 @@ public class Picture extends SimplePicture
     this.copy(flower2,100,0);
     this.copy(flower1,200,0);
     Picture flowerNoBlue = new Picture(flower2);
-    flowerNoBlue.zeroBlue();
+    //flowerNoBlue.zeroBlue();
     this.copy(flowerNoBlue,300,0);
     this.copy(flower1,400,0);
     this.copy(flower2,500,0);
@@ -392,7 +435,7 @@ public class Picture extends SimplePicture
   {
     Picture beach = new Picture("beach.jpg");
     beach.explore();
-    beach.zeroBlue();
+    //beach.zeroBlue();
     beach.explore();
   }
   

@@ -11,19 +11,37 @@ public class PictureTester
   
  public static void makeCollage()
  {
-      Picture sourcePic = new Picture("lamp.jpg");
-      Picture scaledPic=new Picture((sourcePic.getRows()),(sourcePic.getCols()/2));
-      scaledPic.scaleWidthByHalf(sourcePic);
-      Picture part1=new Picture((sourcePic.getRows()),(sourcePic.getCols()));
-      part1.cropAndCopy(scaledPic,0,(scaledPic.getRows()-1),0,(scaledPic.getCols()-1),0,0);
-      part1.cropAndCopy(scaledPic,0,(scaledPic.getRows()-1),0,(scaledPic.getCols()-1),0,(scaledPic.getCols()-1));
-      part1.brightness(50);
+      Picture sourcePic = new Picture("abstract1.jpg");
+      Picture part1=new Picture((sourcePic.getRows()),(sourcePic.getCols()/2));
+      part1.scaleWidthByHalf(sourcePic);
+      //       Picture part1=new Picture((sourcePic.getRows()),(sourcePic.getCols()));
+      //       part1.cropAndCopy(scaledPic,0,(scaledPic.getRows()-1),0,(scaledPic.getCols()-1),0,0);
+      //       part1.cropAndCopy(scaledPic,0,(scaledPic.getRows()-1),0,(scaledPic.getCols()-1),0,(scaledPic.getCols()-1));
+      part1.color(10);
+      //part1.color2(319);
+      //part1.grayscale();
       
-      Picture part2=new Picture("lamp.jpg");
-      part2.brightness(25);
+      Picture part2=new Picture("abstract1.jpg");
+      part2.blueness(50);
+      //part2.greenness(25);
+    
+      Picture part3=new Picture((sourcePic.getRows()),(sourcePic.getCols()/2));
+      part3.scaleWidthByHalf(sourcePic);
+      //part3.brightness(50);
+      //part3.color(427);
+      part3.color2(23);
+      //part3.color3(119);
       
-      Picture collageCanvas=new Picture((sourcePic.getRows()*2),(sourcePic.getCols()*3));
+      Picture part4=new Picture("abstract1.jpg");
+      //part4.brightness(50);
+      //part4.color3(513);
+      part4.color3(75);
+      //513,345
+      Picture collageCanvas=new Picture((sourcePic.getRows()),(sourcePic.getCols()*2));
       collageCanvas.cropAndCopy(part1,0,part1.getRows()-1,0,part1.getCols()-1,0,0);
+      collageCanvas.cropAndCopy(part2,0,part2.getRows()-1,0,part2.getCols()-1,0,(part2.getCols()/2)-1);
+      collageCanvas.cropAndCopy(part3,0,part3.getRows()-1,0,part3.getCols()-1,0,part2.getCols()+part1.getCols()-1);
+      collageCanvas.cropAndCopy(part4,part4.getRows()/2,part4.getRows()-1,0,part4.getCols()-1,0,(part2.getCols()/2)-1);
       collageCanvas.explore();
  
  }
@@ -65,7 +83,7 @@ public class PictureTester
   {
     Picture beach = new Picture("beach.jpg");
     beach.explore();
-    beach.zeroBlue();
+    //beach.zeroBlue();
     beach.explore();
   }
   public static void testCropAndCopy()
