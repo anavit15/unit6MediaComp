@@ -43,6 +43,9 @@ public class PictureTester
       collageCanvas.cropAndCopy(part3,0,part3.getRows()-1,0,part3.getCols()-1,0,part2.getCols()+part1.getCols()-1);
       collageCanvas.cropAndCopy(part4,part4.getRows()/2,part4.getRows()-1,0,part4.getCols()-1,0,(part2.getCols()/2)-1);
       collageCanvas.explore();
+      collageCanvas.write("AnaviTekriwalCollage.jpg");
+
+
  
  }
   
